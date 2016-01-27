@@ -2,14 +2,15 @@ import matplotlib.pyplot as plt
 from math import sqrt
 import numpy as np
 
-
+# Returns delta-y along line m
 def dy(distance, m):
     return m*dx(distance, m)
 
+# Returns delta-x along line m
 def dx(distance, m):
     return sqrt(distance/(m**2+1))
 
-# Returns co-ordinates of the arrow
+# Returns co-ordinates of the arrow head
 def get_arrow_head(p1, p2, length=1, width=0.50):
 
 	lst = [p1,p2]
@@ -18,8 +19,8 @@ def get_arrow_head(p1, p2, length=1, width=0.50):
 	slope, y_intercept = np.polyfit(x, y, 1)
 
 	# check if slope is infinite (vertical line)
-	if int(slope) == int(y_intercept):
-		slope = 25.5
+	if abs(slope - y_intercept) < 1e-10:
+		slope = 25.5	# arbitrary high number
 
 	# calculate intercept point
 	delta_x = dx(length,slope)
@@ -37,7 +38,7 @@ def get_arrow_head(p1, p2, length=1, width=0.50):
 	right = (intercept[0]+dx((width/2),r_slope), intercept[1]+dy((width/2),r_slope))
 	top = p2
 
-	return left, right, top, intercept
+	return left, right, top
 
 
 ####################
@@ -45,11 +46,9 @@ def get_arrow_head(p1, p2, length=1, width=0.50):
 # 	Test
 # ##################
 p1 = [1,1]
-p2 = [1,10]
-length=1
-width=0.50
+p2 = [5,5]
 
-left,right,top,intercept = get_arrow_head(p1,p2,length,width)
+left,right,top = get_arrow_head(p1, p2)
 
 
 ####################
@@ -64,7 +63,7 @@ y = [i[1] for i in lst]
 plt.plot(x, y, '--')
 
 # draw intercept point
-plt.plot(intercept[0], intercept[1], '*')
+# plt.plot(intercept[0], intercept[1], '*')
 
 # draw the arrow
 ls = [left,right,top,left]
