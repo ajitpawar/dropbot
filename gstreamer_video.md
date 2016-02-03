@@ -1,6 +1,6 @@
 #### Gstreamer video comparison table
 |    | Width | Height | Type| Encode| Mux | Framerate | Time (sec)| Size (KB) |
-|:--:|:-----:|:------:|:---------:| :--------:|:---------:|:---------:|
+|:--:|:-----:|:------:|:---:| :----:|:---:|:---------:|----------:|----------:|
 | 1 | 320   | 240 | avi | xvidenc | avimux  | 30  | 10 |  260     |
 | 2 | 1280   | 720 | avi | xvidenc | avimux | 10 | 10 |   1100    |
 | 3 | 1280   | 720 | mp4 | x264enc | mp4mux | 10 | 10 |   1208    |
